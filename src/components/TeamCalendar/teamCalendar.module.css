@@ -1,0 +1,13 @@
+.block{
+    margin: 50px 0;
+}
+.score{
+    background: #f8f9fa;
+    padding: 20px;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.score>div{
+    margin: 0 auto;
+}
