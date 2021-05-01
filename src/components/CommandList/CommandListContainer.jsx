@@ -9,6 +9,7 @@ import SearchInputTeam from '../Search/SearchInputTeam'
 class CommandListContainer extends React.Component {
 
     componentDidMount() {
+       
         try {
             fetch('https://api.football-data.org/v2/teams?areas', 
             {
@@ -22,7 +23,15 @@ class CommandListContainer extends React.Component {
             }).then((response) => {
                 return response.json();
             }).then(data => {
-                this.props.setCommandList(data.teams)
+                
+                if(window.location.search.replace( '?like=', '')){
+                    let teamsFiltered = data.teams.filter(team => {
+                        return team.name.toLowerCase().indexOf(window.location.search.replace( '?like=', '').toLocaleLowerCase()) !== -1
+                    })
+                    this.props.setCommandList(teamsFiltered)
+                } else {
+                    this.props.setCommandList(data.teams)
+                }
             })
         } catch(err) {
             console.log('error', err)

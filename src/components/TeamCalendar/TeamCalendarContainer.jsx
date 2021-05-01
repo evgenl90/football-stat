@@ -10,7 +10,7 @@ class TeamCalendarContainer extends React.Component {
 
     componentDidMount() {
         let strGET = window.location.pathname.replace( 'teamCalendar/', '')
-        console.log(window.location.search.replace( '?', ''))
+        
         let queryStr;
         if(window.location.search.replace( '?', '')){
             queryStr = 'https://api.football-data.org/v2/teams'+strGET+'/matches/?' + window.location.search.replace( '?', '')

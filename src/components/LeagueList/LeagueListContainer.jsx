@@ -23,7 +23,14 @@ class LeagueListContainer extends React.Component {
             }).then((response) => {
                 return response.json();
             }).then(data => { 
-                this.props.setLeagueList(data.competitions)
+                if(window.location.search.replace( '?like=', '')){
+                    let leagueFiltered = data.competitions.filter(team => {
+                        return team.name.toLowerCase().indexOf(window.location.search.replace( '?like=', '').toLocaleLowerCase()) !== -1
+                    })
+                    this.props.setLeagueList(leagueFiltered)
+                } else {
+                    this.props.setLeagueList(data.competitions)
+                }
             })
         } catch(err) {
             console.log('error', err)
